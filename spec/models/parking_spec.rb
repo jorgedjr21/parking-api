@@ -1,6 +1,6 @@
 require 'rails_helper'
-
 # frozen_string_literal: true
+
 RSpec.describe Parking, type: :model do
   describe 'quit!' do
     context 'when parking already paid' do
