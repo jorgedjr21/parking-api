@@ -84,5 +84,3 @@ test:
 production:
   <<: *default
   database: parking-api_production
-  username: parking-api
-  password: <%= ENV['PARKING-API_DATABASE_PASSWORD'] %>
