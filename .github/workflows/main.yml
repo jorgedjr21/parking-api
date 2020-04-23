@@ -57,6 +57,6 @@ jobs:
     - name: Release
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
-        name: jorgedjr21/parking-api:latest
+        name: jorgedjr21/parking_api
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
