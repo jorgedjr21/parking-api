@@ -25,7 +25,7 @@ or
 
 2 - Optionally you can download the latest release version
 
-[Releases](https://github.com/jorgedjr21/parking-api/releases)
+**[Releases](https://github.com/jorgedjr21/parking-api/releases)** <- Dowload here
 
 After download, unpack the files, and run:
 
