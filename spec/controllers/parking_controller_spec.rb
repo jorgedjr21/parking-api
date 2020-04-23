@@ -82,7 +82,7 @@ RSpec.describe ParkingController, type: :controller do
       it 'must not allow the exit' do
         parking_time = parking.updated_at
         put :out, params: { id: parking.id }
-       
+
         message = JSON.parse(response.body)['message']
         expect(parking.reload.updated_at).to_not eq(parking_time)
         expect(message).to eq("Vehicle #{parking.plate} didn't pay the parking and can't exit")
