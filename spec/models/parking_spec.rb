@@ -1,5 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe Parking, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'vehicle plate' do
+    context 'correct format' do
+      it 'should be valid' do
+        parking = build(:parking)
+        expect(parking.valid?).to be_truthy
+      end  
+    end
+
+    context 'wrong format' do
+      it 'should be invalid' do
+        parking = build(:parking, :invalid_plate)
+        expect(parking.invalid?).to be_truthy
+      end
+  
+      it 'should not save' do
+        parking = build(:parking, :invalid_plate)
+        expect { parking.save }.to_not change { Parking.count }
+      end  
+    end
+  end
 end
