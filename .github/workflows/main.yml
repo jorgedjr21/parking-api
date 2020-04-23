@@ -1,4 +1,4 @@
-name: Parking Api Workflow
+name: Workflow
 
 on: [push]
 
