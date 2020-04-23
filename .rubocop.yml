@@ -12,14 +12,16 @@ AllCops:
     - 'app/channels/application_cable/channel.rb'
     - 'app/channels/application_cable/connection.rb'
     - 'app/channels/application_cable/connection.rb'
+    - 'app/controllers/application_controller.rb'
     - 'app/helpers/application_helper.rb'
     - 'app/jobs/application_job.rb'
     - 'app/mailers/application_mailer.rb'
     - 'app/models/application_record.rb'
+    - 'config.ru'
 Layout/SpaceAroundMethodCallOperator:
   Enabled: false
 # Commonly used screens these days easily fit more than 80 characters.
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120
 
 # Too short methods lead to extraction of single-use methods, which can make
@@ -31,9 +33,12 @@ Metrics/MethodLength:
 Metrics/ClassLength:
   Max: 1500
 
+Metrics/BlockLength:
+  Max: 40
+
 # No space makes the method definition shorter and differentiates
 # from a regular assignment.
-Style/SpaceAroundEqualsInParameterDefault:
+Layout/SpaceAroundEqualsInParameterDefault:
   EnforcedStyle: no_space
 
 Style/MethodCallWithArgsParentheses:
