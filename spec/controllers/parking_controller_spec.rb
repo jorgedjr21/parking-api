@@ -34,7 +34,58 @@ RSpec.describe ParkingController, type: :controller do
       it 'must have plate error message' do
         post :create, params: invalid_params
         plate_error = JSON.parse(response.body)
-        expect(plate_error['plate']).to include('invalid plate format')
+        expect(plate_error['errors']['plate']).to include('invalid plate format')
+      end
+    end
+  end
+
+  describe 'PUT /parking/:id/pay' do
+    let(:parking) { create(:parking) }
+    let(:paid_parking) { create(:parking, :paid) }
+
+    context 'when not paid' do
+      it 'must update the parking paid time' do
+        put :pay, params: { id: parking.id }
+        message = JSON.parse(response.body)['message']
+
+        expect(parking.reload.paid_at).not_to be_nil
+        expect(message).to eq('Parking payment done')
+      end
+    end
+
+    context 'when is already paid' do
+      it 'must just return the parking' do
+        put :pay, params: { id: paid_parking.id }
+
+        message = JSON.parse(response.body)['message']
+        expect(message).to eq('Parking payment done before')
+      end
+    end
+  end
+
+  describe 'PUT /parking/:id/out' do
+    let(:parking) { create(:parking) }
+    let(:paid_parking) { create(:parking, :paid) }
+
+    context 'when is paid' do
+      it 'must update the updated_at parking time' do
+        parking_time = paid_parking.updated_at
+        put :out, params: { id: paid_parking.id }
+
+        message = JSON.parse(response.body)['message']
+        expect(paid_parking.reload.updated_at).to_not eq(parking_time)
+        expect(message).to eq("Vehicle #{paid_parking.plate} out with success")
+      end
+    end
+
+    context 'when is not paid' do
+      it 'must not allow the exit' do
+        parking_time = parking.updated_at
+        put :out, params: { id: parking.id }
+       
+        message = JSON.parse(response.body)['message']
+        expect(parking.reload.updated_at).to_not eq(parking_time)
+        expect(message).to eq("Vehicle #{parking.plate} didn't pay the parking and can't exit")
       end
     end
   end

@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :parking do
-    plate { 'FAA-1234' }
+    plate { "#{(0...3).map { rand(65..90).chr }.join}-#{Random.rand(1000..9999)}" }
     paid_at { nil }
 
     trait :invalid_plate do
