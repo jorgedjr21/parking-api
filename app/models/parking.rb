@@ -6,11 +6,16 @@ class Parking < ApplicationRecord
 
   # Adds the exit event of a vehicle
   def quit!
-    update!(updated_at: Time.zone.now) if paid_at.present?
+    update!(exit_at: Time.zone.now) if paid_at.present?
   end
 
   # Update the payment time of the parking (Do the payment)
   def pay!
     update!(paid_at: Time.zone.now) if paid_at.blank?
+  end
+
+  # Represents the model with the serialization rules
+  def serialized
+    ActiveModelSerializers::SerializableResource.new(self, {})
   end
 end

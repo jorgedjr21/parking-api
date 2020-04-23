@@ -89,4 +89,35 @@ RSpec.describe ParkingController, type: :controller do
       end
     end
   end
+
+  describe 'GET /parking/:plate' do
+    let!(:parkings_empty) { create_list(:parking, 5, plate: 'AAA-1234') }
+    let!(:parkings_informed) do
+      create_list(
+        :parking,
+        5,
+        plate: 'AAA-1234',
+        paid_at: Time.zone.now + rand(5..10).minutes,
+        exit_at: Time.zone.now + rand(20..30).minutes
+      )
+    end
+
+    context 'when car alread parked' do
+      it 'must show a historic of parking' do
+        get :show, params: { plate: 'AAA-1234' }
+
+        body = JSON.parse(response.body)
+        expect(body.count).to eq(10)
+      end
+    end
+
+    context 'when car not parked' do
+      it 'must show a historic of parking' do
+        get :show, params: { plate: 'AAA-2234' }
+
+        body = JSON.parse(response.body)
+        expect(body.count).to eq(0)
+      end
+    end
+  end
 end

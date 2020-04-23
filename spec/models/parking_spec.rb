@@ -2,23 +2,23 @@ require 'rails_helper'
 # frozen_string_literal: true
 
 RSpec.describe Parking, type: :model do
-  describe 'quit!' do
+  describe '#quit!' do
     context 'when parking already paid' do
-      it 'must update the parking data' do
+      it 'must update the parking exit_at' do
         parking = create(:parking, :paid)
-        expect { parking.quit! }.to change(parking, :updated_at)
+        expect { parking.quit! }.to change(parking, :exit_at)
       end
     end
 
     context 'when parking is not paid' do
       it 'must not update the parking data' do
         parking = create(:parking)
-        expect { parking.quit! }.not_to change(parking, :updated_at)
+        expect { parking.quit! }.not_to change(parking, :exit_at)
       end
     end
   end
 
-  describe 'pay!' do
+  describe '#pay!' do
     context 'when parking already paid' do
       it 'must not update the parking paid_at data' do
         parking = create(:parking, :paid)
@@ -30,6 +30,14 @@ RSpec.describe Parking, type: :model do
         parking = create(:parking)
         expect { parking.pay! }.to change(parking, :paid_at)
       end
+    end
+  end
+
+  describe '#serialized' do
+    it 'must serialize with the ActiveModelSerializer rules' do
+      parking = create(:parking, :paid)
+      expect(parking.serialized.as_json[:parked_at]).not_to be_nil
+      expect(parking.serialized.as_json[:created_at]).to be_nil
     end
   end
 

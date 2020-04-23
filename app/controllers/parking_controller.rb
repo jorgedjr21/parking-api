@@ -2,7 +2,8 @@
 
 # Parking controller. The api that handle the parking lot requests
 class ParkingController < ApplicationController
-  before_action :set_parking, only: [:out, :pay]
+  before_action :set_parking, only: %i[out pay]
+  before_action :parkings_by_plate, only: :show
   # Method used when vehicle enter in parking lot
   def create
     parking = Parking.new(parking_params)
@@ -13,6 +14,10 @@ class ParkingController < ApplicationController
     end
   end
 
+  def show
+    render json: @parkings, each_serializer: ParkingSerializer
+  end
+
   # Method used when vehicle quit the parking lot
   def out
     out_result = { message: '', status: 200 }
@@ -21,7 +26,7 @@ class ParkingController < ApplicationController
       @parking.quit!
       out_result = {
         message: "Vehicle #{@parking.plate} out with success",
-        data: @parking
+        data: @parking.serialized
       }
     else
       out_result = {
@@ -35,10 +40,10 @@ class ParkingController < ApplicationController
 
   # Method used to pay the parking over a request
   def pay
-    return render json: { message: 'Parking payment done before', data: @parking, status: 200 }, status: :ok if @parking.paid_at.present?
+    return render json: { message: 'Parking payment done before', data: @parking.serialized, status: 200 }, status: :ok if @parking.paid_at.present?
 
     @parking.pay!
-    render json: { message: 'Parking payment done', data: @parking, status: 200 }, status: :ok
+    render json: { message: 'Parking payment done', data: @parking.serialized, status: 200 }, status: :ok
   end
 
   private
@@ -51,5 +56,9 @@ class ParkingController < ApplicationController
     @parking = Parking.find_by(id: parking_params['id'])
     result = { message: "Parking booking ##{parking_params['id']} not found", status: 404 }
     render json: result, status: :not_found if @parking.blank?
+  end
+
+  def parkings_by_plate
+    @parkings = Parking.where(plate: parking_params['plate'])
   end
 end
