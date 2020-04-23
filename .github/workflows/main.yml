@@ -58,5 +58,5 @@ jobs:
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: jorgedjr21/parking-api:latest
-        username: ${{ secrets.DOCKERHUB_LOGIN }}
-        password: ${{ secrets.DOCKERHUB_PASWORD }}
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
