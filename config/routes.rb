@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   post "/parking", to: "parking#create"
   put "/parking/:id/out", to: "parking#out"
   put "/parking/:id/pay", to: "parking#pay"
+  get "/parking/:plate", to: "parking#show"
 end
