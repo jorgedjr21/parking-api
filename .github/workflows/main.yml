@@ -32,14 +32,14 @@ jobs:
     
     steps:
       - name: DB Configuration
-      env:
-        DB_HOST: localhost
-        DB_USER: postgres
-        DB_PASSWORD: postgres
-        PGPORT: ${{ job.services.postgres.ports[5432] }}
-        RAILS_ENV: test
-      run: |
-        bin/rails db:setup
+        env:
+          DB_HOST: localhost
+          DB_USER: postgres
+          DB_PASSWORD: postgres
+          PGPORT: ${{ job.services.postgres.ports[5432] }}
+          RAILS_ENV: test
+        run: |
+          bin/rails db:setup
 
       - name: Run tests
         env:
