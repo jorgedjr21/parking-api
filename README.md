@@ -28,9 +28,9 @@ STATUS 201
 }
 ```
 
-<small>O ID é o número da reserva</small>
+O ID é o número da reserva
 
-SAÍDAS
+#### SAÍDAS
 ```
 PUT /parking/:id/out
 
@@ -55,7 +55,7 @@ ou
 }
 ```
 
-PAGAMENTO
+#### PAGAMENTO
 
 ```
 PUT /parking/:id/pay
@@ -89,7 +89,7 @@ ou
 }
 ```
 
-HISTÓRICO
+### HISTÓRICO
 
 ```
 GET /parking/:plate
