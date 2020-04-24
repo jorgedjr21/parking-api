@@ -30,7 +30,7 @@ class ParkingController < ApplicationController
       }
     else
       out_result = {
-        message: "Vehicle #{@parking.plate} didn't pay the parking and can't exit",
+        message: "Vehicle #{@parking.plate} didn't pay the parking time and can't exit",
         status: 403
       }
     end

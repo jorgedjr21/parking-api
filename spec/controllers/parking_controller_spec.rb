@@ -85,7 +85,7 @@ RSpec.describe ParkingController, type: :controller do
 
         message = JSON.parse(response.body)['message']
         expect(parking.reload.updated_at).to_not eq(parking_time)
-        expect(message).to eq("Vehicle #{parking.plate} didn't pay the parking and can't exit")
+        expect(message).to eq("Vehicle #{parking.plate} didn't pay the parking time and can't exit")
       end
     end
   end
