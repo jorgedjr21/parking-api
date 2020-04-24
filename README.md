@@ -26,6 +26,9 @@ STATUS 201
   },
   "status": 201
 }
+
+ou
+STATUS 401 e Errors
 ```
 
 O ID é o número da reserva
@@ -34,7 +37,7 @@ O ID é o número da reserva
 ```
 PUT /parking/:id/out
 
-
+RESPONSE
 {
   "message": "Vehicle AAA-1234 out with success",
   "data": {
@@ -60,6 +63,7 @@ ou
 ```
 PUT /parking/:id/pay
 
+RESPONSES
 {
   "message": "Parking payment done",
   "data": {
@@ -94,6 +98,7 @@ ou
 ```
 GET /parking/:plate
 
+RESPONSE
 [
   {
     "id": 2,
