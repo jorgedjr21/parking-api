@@ -38,7 +38,7 @@ After download, unpack the files, and run, inside the project folder:
 ## Tests and Coverage
 
 - The actual coverage of the application is **100%**
-- The CI/CD was made with [Github Actions](https://drive.google.com/file/d/1SXpiP8A9zPHe5nwCTlPC-ZlH0oHcWMsn/view?usp=sharing)
+- The CI/CD was made with [Github Actions](https://github.com/jorgedjr21/parking-api/actions?query=workflow%3A%22Parking+API%22))
   - When a push is made in the **master** branch, the github action auto push to dockerhub with the tag *latest*
 
 ### Other Infos
