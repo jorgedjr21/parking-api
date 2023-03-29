@@ -55,7 +55,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Release
-      uses: elgohr/Publish-Docker-Github-Action@master
+      uses: elgohr/Publish-Docker-Github-Action@v5
       with:
         name: jorgedjr21/parking_api
         username: ${{ secrets.DOCKER_USERNAME }}
